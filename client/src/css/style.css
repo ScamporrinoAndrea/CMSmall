@@ -1,0 +1,69 @@
+.pageCard {
+    width: 100%;
+}
+
+.pageCard:hover {
+    padding: 5px;
+    transition: all .4s ease;
+}
+
+.pageCardTitle {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.pageCardParagraph {
+    height: 100px;
+    overflow: hidden;
+}
+
+.pageCardHeader {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.title {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.Header {
+    margin-top: 20px;
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.Paragraph {
+    font-size: medium;
+    font-weight: 400;
+}
+
+.Image {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
+.form {
+    background-color: #F2EFEF;
+    height: 100%;
+    min-height: 93vh;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+.footerPage {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 101vw;
+    padding-bottom: 30px;
+    background-color: #F2EFEF;
+}
