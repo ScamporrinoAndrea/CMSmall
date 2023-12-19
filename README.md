@@ -1,27 +1,34 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/suhcjUE-)
 # Exam #1: "CMSmall"
 ## Student: s318927 SCAMPORRINO ANDREA
 
+## Screenshot
+
+- All pages (Home)
+![Screenshot](./img/AllPages.png)
+
+- Form for creating a page
+![Screenshot](./img/Form.png)
+
 ## React Client Application Routes
 
-- Route `/`: Schermata principale, mostra tutte le pagine con la possibilità di filtrarle quando l'utente ha effettuato il login, e solo quelle pubblicate quando non ha eseguito l'accesso.
-- Route `/page/:id`: Mostra il contentuto della pagina.
-- Route `/add`: Form per la creazione di una pagina.
-- Route `/edit/:id`: Form per la modifica di una pagina selezionata tramite l'ID.
-- Route `/login`: Mostra la schermata per effettuare il login.
-- Route `/*`: Route per le pagine che non esistono.
+- Route `/`: Main screen, displays all pages with the ability to filter them when the user is logged in, and only published ones when not logged in.
+- Route `/page/:id`: Displays the content of the page.
+- Route `/add`: Form for creating a new page.
+- Route `/edit/:id`: Form for editing a selected page using its ID.
+- Route `/login`: Shows the screen for user login.
+- Route `/*`: Route for non-existing pages.
 
 ## API Server
 
-### __Autenticazione__
+### Authentication
 
-#### __Crea una nuova sessione (login)__
+#### Create a new session (login)
 
 URL: `/api/sessions`
 
-Metodo HTTP: POST
+HTTP Method: POST
 
-Descrizione: Crea una nuova sessione partendo dalle credenziali date.
+Description: Creates a new session based on the provided credentials.
 
 Request body:
 ```
@@ -43,16 +50,15 @@ Response body:
 }
 ```
 
-
-#### __Ritorna la sessione corrente se presente__
+#### Return the current session if present
 
 URL: `/api/sessions/current`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Verifica se la sessione è valida e ritorna le informazioni dell'utente. Deve essere fornito un cookie con un ID di sessione valido per ottenere le informazioni dell'utente autenticato nella sessione corrente.
+Description: Checks if the session is valid and returns user information. A valid session ID cookie must be provided to get authenticated user information.
 
-Request body: _None_ 
+Request body: _None_
 
 Response: `201 Created` (success), `401 Unauthorized` (error).
 
@@ -66,13 +72,13 @@ Response body:
 }
 ```
 
-#### __Elimina la sessione corrente (logout)__
+#### Delete the current session (logout)
 
 URL: `/api/sessions/current`
 
-Metodo HTTP: DELETE
+HTTP Method: DELETE
 
-Descrizione: Elimina la sessione corrente. Deve essere fornito un cookie con un ID di sessione valido.
+Description: Deletes the current session. A valid session ID cookie must be provided.
 
 Request body: _None_
 
@@ -80,15 +86,15 @@ Response: `200 OK` (success), `500 Internal Server Error` (generic error).
 
 Response body: _None_
 
-### __Generali__
+### General
 
-#### __Ritorna il titolo del sito__
+#### Return the site title
 
 URL: `/api/title`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Ritorna il titolo del sito.
+Description: Returns the title of the site.
 
 Request body: _None_
 
@@ -99,17 +105,17 @@ Response body:
 "CMSmall"
 ```
 
-#### __Ritorna tutte le pagine__
+#### Return all pages
 
 URL: `/api/pages`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Ritorna tutte le pagine per la visualizzazione nella home dell'utente che ha effettuato l'accesso. Ogni pagina è composta dalle sue proprietà e da un array di blocchi in cui sono salvati solo il primo header, il primo paragrafo e la prima immagine (se esistenti). Deve essere fornito un cookie con un ID di sessione valido.
+Description: Returns all pages for display on the user's home screen after login. Each page consists of its properties and an array of blocks containing only the first header, the first paragraph, and the first image (if any). A valid session ID cookie must be provided.
 
 Request body: _None_
 
-Response: `200 OK` (success), `500 Internal Server Error` (Database error). Se la richiesta non proviene da una sessione autenticata, `401 Unauthorized`.
+Response: `200 OK` (success), `500 Internal Server Error` (Database error). If the request is not from an authenticated session, `401 Unauthorized`.
 
 Response body:
 ```
@@ -143,13 +149,13 @@ Response body:
 ]
 ```
 
-#### __Ritorna tutte le pagine pubblicate__
+#### Return all published pages
 
 URL: `/api/pages/published`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Ritorna tutte le pagine già pubblicate per la visualizzazione nella home dell'utente che non ha effettuato l'accesso. Ogni pagina è composta dalle sue proprietà e da un array di blocchi in cui sono salvati solo il primo header, il primo paragrafo e la prima immagine (se esistenti).
+Description: Returns all pages already published for display on the user's home screen without login. Each page consists of its properties and an array of blocks containing only the first header, the first paragraph, and the first image (if any).
 
 Request body: _None_
 
@@ -187,13 +193,13 @@ Response body:
 ]
 ```
 
-#### __Ritorna la pagina richiesta (ID)__
+#### Return the requested page (ID)
 
 URL: `/api/pages/<id>`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Ritorna la pagina richiesta dall'ID. In caso questa non esistesse oppure l'utente non avesse l'autorizzazione a vederla viene ritornato un messaggio di errore.
+Description: Returns the requested page by ID. If it doesn't exist or the user doesn't have permission to view it, an error message is returned.
 
 Request body: _None_
 
@@ -239,13 +245,13 @@ Response body:
 }
 ```
 
-#### __Aggiunge una pagina__
+#### Add a page
 
 URL: `/api/pages`
 
-Metodo HTTP: POST
+HTTP Method: POST
 
-Descrizione: Crea una pagina. Deve essere fornito un cookie con un ID di sessione valido.
+Description: Creates a new page. A valid session ID cookie must be provided.
 
 Request body:
 ```
@@ -261,55 +267,55 @@ Request body:
 }
 ```
 
-Response: `201 Created` (success), `503 Service Unavailable` (Database error). Se il body della richiesta non è corretto, `422 Unprocessable Entity` (validation error). Se la richiesta non proviene da una sessione autenticata, `401 Unauthorized`.
+Response: `201 Created` (success), `503 Service Unavailable` (Database error). If the request body is incorrect, `422 Unprocessable Entity` (validation error). If the request is not from an authenticated session, `401 Unauthorized`.
 
-Response body: L'ID della pagina creata
+Response body: ID of the created page
 ```
 81
 ```
 
-#### __Elimina una pagina__
+#### Delete a page
 
 URL: `/api/pages/<id>`
 
-Metodo HTTP: DELETE
+HTTP Method: DELETE
 
-Descrizione: Elimina una pagina identificata dal suo ID. Deve essere fornito un cookie con un ID di sessione valido e l'utente deve essere o un admin o il proprietario della pagina.
+Description: Deletes a page identified by its ID. A valid session ID cookie must be provided, and the user must be either an admin or the owner of the page.
 
 Request body: _None_
 
-Response: `200 OK` (success), `500 Internal Server Error` (Database error). Se la richiesta non proviene da una sessione autenticata, `401 Unauthorized`.
+Response: `200 OK` (success), `500 Internal Server Error` (Database error). If the request is not from an authenticated session, `401 Unauthorized`.
 
 Response body: _None_
 
-#### __Modifica il titolo del sito__
+#### Modify the site title
 
 URL: `/api/title`
 
-Metodo HTTP: PUT
+HTTP Method: PUT
 
-Descrizione: Modifica il titolo del sito. Deve essere fornito un cookie con un ID di sessione valido e l'utente deve essere un admin.
+Description: Modifies the title of the site. A valid session ID cookie must be provided, and the user must be an admin.
 
 Request body:
 ```
 {"title":"CMSmall"}
 ```
 
-Response: `200 OK` (success), `503 Service Unavailable` (Database error). Se il body non è corretto, `422 Unprocessable Entity` (validation error). Se la richiesta non proviene da una sessione autenticata come admin, `401 Unauthorized`.
+Response: `200 OK` (success), `503 Service Unavailable` (Database error). If the body is incorrect, `422 Unprocessable Entity` (validation error). If the request is not from an authenticated session as an admin, `401 Unauthorized`.
 
 Response body: _None_
 
-#### __Ritorna tutti gli utenti__
+#### Return all users
 
 URL: `/api/users`
 
-Metodo HTTP: GET
+HTTP Method: GET
 
-Descrizione: Ritorna tutti gli utenti. Deve essere fornito un cookie con un ID di sessione valido e l'utente deve essere un admin.
+Description: Returns all users. A valid session ID cookie must be provided, and the user must be an admin.
 
 Request body: _None_
 
-Response: `200 OK` (success), `500 Internal Server Error` (Database error). Se la richiesta non proviene da una sessione autenticata, `401 Unauthorized`.
+Response: `200 OK` (success), `500 Internal Server Error` (Database error). If the request is not from an authenticated session, `401 Unauthorized`.
 
 Response body:
 ```
@@ -334,33 +340,22 @@ Response body:
 
 ## Database Tables
 
-- Table `users` - (idUser, name, mail, salt, hash, admin) -> admin=1 se l'utente è un admin 0 altrimenti
+- Table `users` - (idUser, name, mail, salt, hash, admin) -> admin=1 if the user is an admin, 0 otherwise
 - Table `pages` - (idPage, title, idUser, creationDate, publicationDate)
 - Table `blocks` - (idBlock, idPage, type, content, position)
 - Table `properties` - (idProp, title)
 
 ## Main React Components
 
-- `Home`: Componente principale per la grafica della home, gestisce il filtro delle pagine se l'utente è autenticato e chiama il componente PageCard per ogni pagina.
-- `PageCard`: Si occupa della visualizzazione della singola pagina nell'elenco delle pagine della home.
-- `Page`: Mostra la pagina a schermo intero. È utilizzato dai componenti PageCard e Form.
-- `MyForm` (in `Form.jsx`): Form per la creazione e la modifica di una pagina.
-- `Login`: Pagina per effettuare il login.
-
-
-## Screenshot
-
-- Tutte le pagine (Home)
-![Screenshot](./img/AllPages.png)
-
-- Form per la creazione di una pagina
-![Screenshot](./img/Form.png)
+- `Home`: Main component for the home screen graphics, manages page filtering if the user is authenticated and calls the `PageCard` component for each page.
+- `PageCard`: Manages the display of a single page in the home page list.
+- `Page`: Displays the full-page. Used by the `PageCard` and `Form` components.
+- `MyForm` (in `Form.jsx`): Form for creating and editing a page.
+- `Login`: Page for user login.
 
 ## Users Credentials
 
-- `mail`: admin@polito.it, `password`: pwd (utente admin)
+- `mail`: admin@polito.it, `password`: pwd (admin user)
 - `mail`: 318927@polito.it, `password`: pwd
 - `mail`: 318928@polito.it, `password`: pwd
 - `mail`: 318929@polito.it, `password`: pwd
-
-
